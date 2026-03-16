@@ -9,13 +9,13 @@ USERS = {
     "admin": generate_password_hash("password")
 }
 
-app.config['SECRET_KEY'] = 'dev-secret'
+app.secret_key = 'dev-secret'
 
-with open('explainer/feature_names.pkl', 'rb') as f:
+with open('models/feature_names.pkl', 'rb') as f:
     feature_names = pickle.load(f)
-with open('explainer/rf_model.pkl', 'rb') as f:
+with open('models/rf_model.pkl', 'rb') as f:
     MODEL = pickle.load(f)
-with open('explainer/shap_explainer.pkl', 'rb') as f:
+with open('models/shap_explainer.pkl', 'rb') as f:
     EXPLAINER = pickle.load(f)
 
 # Wrapper corrigé avec @wraps
