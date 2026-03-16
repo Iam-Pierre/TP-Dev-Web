@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="/static/style.css">
+    <title>TD 1 Machine learning</title>
+</head>
+<body>
+    <header>
+            <h2>Prédiction du diabète</h2>
+            <p>TP -Flask</p>
+    </header>
+    <main>
+        <article>
+            <form>
+            <div class="form-row">
+                <div class="formulaire"></div>
+                    
+                    <div class="input-group">
+                        <h2>Entrer les informations médicales</h2>
+                        {% for feature in FEATURES %}   
+                            <label for="{{ feature }}">{{ feature }}</label>
+                            <input type="text" name="{{ feature }}" id="{{ feature }}">
+                        {% endfor %}
+                        <button type="submit">Probabilité d'être diabétique</button>
+
+                    </div>
+                </div> 
+
+        </form>
+        <div>
+            <button type="button" id="show" style="display: none">Afficher les résultats</button>
+        </div>
+    <div id="result">
+        <div class="progressbar>
+            <div id='prediction'>
+
+            </div>
+
+    </div>
+
+    </main>
+    <footer>
+        <p>Pierre 2002-2026 </p>
+    </footer>
+</body>
