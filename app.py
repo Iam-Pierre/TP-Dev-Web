@@ -3,7 +3,7 @@ from functools import wraps  # ← manquant pour le wrapper
 import pickle
 from werkzeug.security import generate_password_hash, check_password_hash
 
-app = Flask(__name__) 
+app = Flask(__name__, template_folder='templates') 
 
 USERS = {
     "admin": generate_password_hash("password")
@@ -42,15 +42,15 @@ def login():
     u = data.get("username", "")
     p = data.get("password", "")
 
-    # Inscription si nouvel utilisateur
-    if u not in USERS:
-        USERS[u] = generate_password_hash(p)
+    if u not in USERS or not check_password_hash(USERS[u], p):
+        return {"error": "identifiants invalides"}, 401
+
     
     session["user"] = u
     return {"ok": True}
 
 @app.route("/api/predict", methods=['POST'])
-
+@auth_required  
 def predict():
     data = request.get_json()
     features = [float(data[f]) for f in feature_names]
