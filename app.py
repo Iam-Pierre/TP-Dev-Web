@@ -49,9 +49,6 @@ def login():
     session["user"] = u
     return {"ok": True}
 
-
-
-
 @app.route("/api/predict", methods=['POST'])
 
 def predict():
