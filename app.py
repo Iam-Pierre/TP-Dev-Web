@@ -6,6 +6,8 @@ import hashlib
 
 app = Flask(__name__, template_folder='templates') 
 
+API_KEYS = { "78cbced4b65546f55f8d5a7de684": "pierreWang" }
+
 USERS = {
     "pierreWang": generate_password_hash("wangpierre")
 }
@@ -55,7 +57,6 @@ def handleLogout():
     session.pop("user", None)   
     return {"ok": True}
 
-API_KEYS = { "78cbced4b65546f55f8d5a7de684": "pierreWang" }
 @app.route("/api/inference", methods=["POST"])
 def inference():
     raw_key = request.headers.get("X-API-Key")
