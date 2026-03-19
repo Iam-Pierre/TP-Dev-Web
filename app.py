@@ -1,7 +1,8 @@
-from flask import Flask, render_template, request, send_file, session, redirect, url_for, request
+from flask import Flask, render_template, request, session, redirect, url_for, 
 from functools import wraps  # ← manquant pour le wrapper
 import pickle
 from werkzeug.security import generate_password_hash, check_password_hash
+import hashlib
 
 app = Flask(__name__, template_folder='templates') 
 
@@ -53,6 +54,19 @@ def login():
 def handleLogout():
     session.pop("user", None)   
     return {"ok": True}
+
+API_KEYS = { "78cbced4b65546f55f8d5a7de684": "pierreWang" }
+@app.route("/api/inference", methods=["POST"])
+def inference():
+    raw_key = request.headers.get("X-API-Key")
+    key_hash = hashlib.sha256(raw_key.encode()).hexdigest()
+    if key_hash not in API_KEYS:
+     return {"error": "unauthorized"}, 401
+
+    features = request.get_json()
+    proba = MODEL.predict(features)
+    return {"proba": proba}
+
 
 @app.route("/api/predict", methods=['POST'])
 @auth_required  
