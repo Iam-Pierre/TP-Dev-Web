@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, send_file, session, redirect, url_for
+from flask import Flask, render_template, request, send_file, session, redirect, url_for, request
 from functools import wraps  # ← manquant pour le wrapper
 import pickle
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 app = Flask(__name__, template_folder='templates') 
 
 USERS = {
-    "admin": generate_password_hash("password")
+    "pierreWang": generate_password_hash("wangpierre")
 }
 
 app.secret_key = 'dev-secret'
@@ -47,6 +47,11 @@ def login():
 
     
     session["user"] = u
+    return {"ok": True}
+
+@app.route("/api/logout", methods=['POST'])
+def handleLogout():
+    session.pop("user", None)   
     return {"ok": True}
 
 @app.route("/api/predict", methods=['POST'])

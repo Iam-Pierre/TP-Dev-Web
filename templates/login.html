@@ -2,7 +2,8 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='loginScript.js') }}" defer></script>
     <title>TD 1 Machine learning</title>
 </head>
 <body>
@@ -12,19 +13,17 @@
     </header>
     <main>
         <article>
-            <form>
+            <form id="formulaireLogin">
             <div class="form-row">
                 <div class="formulaire"></div>
                     
                     <div class="input-group">
                         <h2>Entrer les informations de connexion</h2>
-                        
                         <label id="login">Nom d'utilisateur</label>
                         <input type="text" name="username" id="username">
                         <label id="login">Mot de passe</label>
-                        <input type="text" name="password" id="password">
-                        
-                        <button type="button" onclick="handleLogin()">Se connecter</button>
+                        <input type="password" name="password" id="password">
+                        <button type="submit" id="login">Se connecter</button>
 
                     </div>
                 </div> 
@@ -38,5 +37,4 @@
     <footer>
         <p>Pierre 2002-2026 </p>
     </footer>
-    <script src="static/loginScript.js"></script>
 </body>

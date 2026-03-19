@@ -2,17 +2,20 @@
 
 <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>TD 1 Machine learning</title>
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </head>
 <body>
     <header>
+
             <h2>Prédiction du diabète</h2>
-            <p>TP -Flask</p>
+            <p>TP -Flask</p>  
+           
     </header>
     <main>
         <article>
-            <form>
+            <form id="formulaire">
             <div class="form-row">
                 <div class="formulaire"></div>
                     
@@ -23,6 +26,7 @@
                             <input type="text" name="{{ feature }}" id="{{ feature }}">
                         {% endfor %}
                         <button type="submit">Probabilité d'être diabétique</button>
+                        <button type="button" id="logout">Se déconnecter</button>
 
                     </div>
                 </div> 
@@ -43,5 +47,4 @@
     <footer>
         <p> Pierre 2002-2026 </p>
     </footer>
-    <script src="static/script.js"></script>
 </body>

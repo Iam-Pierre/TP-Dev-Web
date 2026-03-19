@@ -1,6 +1,10 @@
 const form = document.getElementById("formulaire");
 const show = document.getElementById("show");
-form.addEventListener("submit", (e) => {const data = Object.fromEntries(new FormData(form))});
+form.addEventListener("submit", (e) => {
+e.preventDefault();
+    form.style.display = 'none';
+    show.style.display = 'inline-block'
+    const data = Object.fromEntries(new FormData(form))
     fetch("/api/predict", {
         method: "POST",
         headers: {
@@ -15,12 +19,25 @@ form.addEventListener("submit", (e) => {const data = Object.fromEntries(new Form
         if (isNaN(prob)) prob=0;
         prob = (prob * 100).toFixed(2);
         document.getElementById("result").textContent = `Probabilité d'être diabétique: ${prob}%`;
-        form.style.display = 'none';
-        show.style.display = 'inline-block'
     })
+});
 
-const progressbar = documents.getElementById("prediction").style.width = data['prediction']*100 + "%";
-progressbar.style
+
+async function handleLogout() { 
+    console.log("Logout clicked");
+    const response = await fetch('/api/logout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    });
+    const data = await response.json();
+    if (data.ok) {
+        window.location.href = "/";  
+    }
+}
+document.getElementById("logout").addEventListener("click", handleLogout);
+
+// const progressbar = document.getElementById("prediction").style.width = data['prediction']*100 + "%";
+// progressbar.style
 
 
 
